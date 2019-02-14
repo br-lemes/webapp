@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href="mini.min.css" rel="stylesheet">
+	<style>
+		body { background-color: #eee; }
+		div.card > h2.row > a { text-decoration: none; }
+		div.card > h2.row > a > img { vertical-align: text-top; }
+	</style>
+	<title>Lista de aplicativos</title>
+</head>
+<body>
+	<header class="row sticky">
+		{{#applist}}
+			<a href="{{href}}" class="col-sm button">
+				<img src="{{href}}/icon.png" width="32" height="32" alt="Ícone">
+			</a>
+		{{/applist}}
+	</header>
+	<div class="card fluid" style="text-align: center;">
+		<h1>Lista de aplicativos</h1>
+	</div>
+	{{#applist}}
+	<div class="card fluid container">
+		<h2 class="row section">
+			<a href="{{href}}">
+				<img src="{{href}}/icon.png" width="32" height="32" alt="Ícone">
+				{{name}}
+			</a>
+		</h2>
+		<p class="row section">
+			{{description}}
+		</p>
+	</div>
+	{{/applist}}
+</body>
+</html>
