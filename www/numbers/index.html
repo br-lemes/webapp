@@ -22,6 +22,7 @@
 					document.getElementById("xoffset").value = data.xoffset;
 					document.getElementById("yoffset").value = data.yoffset;
 					document.getElementById("profile").innerHTML = "VOLUME";
+					document.getElementById("print").disabled = false;
 					profile = data.profile
 			});
 		};
@@ -36,6 +37,7 @@
 					document.getElementById("xoffset").value = data.xoffset;
 					document.getElementById("yoffset").value = data.yoffset;
 					document.getElementById("profile").innerHTML = "INT/REG";
+					document.getElementById("print").disabled = false;
 					profile = data.profile
 				});
 		};
@@ -119,7 +121,7 @@
 				</button>
 			</div>
 			<div class="col-sm">
-				<button class="primary shadowed" onclick="doPrint();">
+				<button class="primary shadowed" onclick="doPrint();" id="print" disabled>
 					<img src="/img/printer.png" width="32" height="32" alt="Impressora">
 					<br>IMPRIMIR
 				</button>
