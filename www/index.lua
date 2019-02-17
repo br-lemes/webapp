@@ -16,12 +16,13 @@ for file in lfs.dir("www") do
 		local mode = lfs.attributes("www/" .. file, "mode")
 		if mode == "directory" then
 			local f, e = io.open(string.format("www/%s/info.json", file))
-			if not f then error(e) end
-			local buf = f:read("*a")
-			f:close()
-			local app = json.decode(buf)
-			app.href = file
-			table.insert(view.applist, app)
+			if f then
+				local buf = f:read("*a")
+				f:close()
+				local app = json.decode(buf)
+				app.href = file
+				table.insert(view.applist, app)
+			end
 		end
 	end
 end
