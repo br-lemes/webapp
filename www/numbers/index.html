@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href="/mini-default.min.css" rel="stylesheet">
+	<title>Números</title>
+	<style>
+		body { background-color: #eee; }
+		div.card > div.section > div > * { width: 100%; }
+	</style>
+	<script>
+		var profile = "vol";
+		function loadVol() {
+			fetch("/numbers/data/vol")
+				.then(function(response) { return response.json(); })
+				.then(function(data) {
+					document.getElementById("number").value  = data.number;
+					document.getElementById("count").value   = data.count;
+					document.getElementById("ndays").value   = data.ndays;
+					document.getElementById("digits").value  = data.digits;
+					document.getElementById("xoffset").value = data.xoffset;
+					document.getElementById("yoffset").value = data.yoffset;
+					document.getElementById("profile").innerHTML = "VOLUME";
+					profile = data.profile
+			});
+		};
+		function loadInt() {
+			fetch("/numbers/data/int")
+				.then(function(response) { return response.json(); })
+				.then(function(data) {
+					document.getElementById("number").value  = data.number;
+					document.getElementById("count").value   = data.count;
+					document.getElementById("ndays").value   = data.ndays;
+					document.getElementById("digits").value  = data.digits;
+					document.getElementById("xoffset").value = data.xoffset;
+					document.getElementById("yoffset").value = data.yoffset;
+					document.getElementById("profile").innerHTML = "INT/REG";
+					profile = data.profile
+				});
+		};
+		function doPrint() {
+			var data = {
+				number:  document.getElementById("number").value,
+				count:   document.getElementById("count").value,
+				ndays:   document.getElementById("ndays").value,
+				digits:  document.getElementById("digits").value,
+				xoffset: document.getElementById("xoffset").value,
+				yoffset: document.getElementById("yoffset").value,
+				profile: profile,
+			};
+			fetch("/numbers/print",
+				{method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(data)
+				})
+				.then(function(response) {
+					if (response.ok) {
+						document.getElementById("sucess").checked = true;
+						document.getElementById("number").value = Math.ceil(data.number / 3) * 3;
+					} else {
+						document.getElementById("error").checked = true;
+					}
+				});
+		};
+		document.addEventListener("DOMContentLoaded", loadVol);
+	</script>
+</head>
+<body>
+	<header class="row sticky">
+		<a href="/" class="col-sm button">
+			<img src="/img/house.png" width="32" height="32" alt="Principal">
+		</a>
+		<a href="numbers" class="col-sm button">
+			<img src="/numbers/icon.png" width="32" height="32" alt="Números">
+		</a>
+	</header>
+	<div class="card fluid container">
+		<h1 class="section row" id="profile">VOLUME</h1>
+		<div class="section row">
+			<div class="col-sm">
+				<label for="number">Inicial</label>
+				<input type="number" id="number" />
+			</div>
+			<div class="col-sm">
+				<label for="count">Quantidade</label>
+				<input type="number" id="count" />
+			</div>
+			<div class="col-sm">
+				<label for="ndays">Prazo</label>
+				<input type="number" id="ndays" />
+			</div>
+		</div>
+		<div class="section row">
+			<div class="col-sm">
+				<label for="digits">Dígitos</label>
+				<input type="number" id="digits" value="3" />
+			</div>
+			<div class="col-sm">
+				<label for="xoffset">Horizontal</label>
+				<input type="number" id="xoffset" value="40" />
+			</div>
+			<div class="col-sm">
+				<label for="digits">Vertical</label>
+				<input type="number" id="yoffset" value="15" />
+			</div>
+		</div>
+		<div class="section row">
+			<div class="col-sm">
+				<button class="shadowed" onclick="loadVol();">
+					<img src="/img/box.png" width="32" height="32" alt="Caixa">
+					<br>VOLUME
+				</button>
+			</div>
+			<div class="col-sm">
+				<button class="shadowed" onclick="loadInt();">
+					<img src="/img/package_green.png" width="32" height="32" alt="Pacote">
+					<br>INT/REG
+				</button>
+			</div>
+			<div class="col-sm">
+				<button class="primary shadowed" onclick="doPrint();">
+					<img src="/img/printer.png" width="32" height="32" alt="Impressora">
+					<br>IMPRIMIR
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<input type="checkbox" id="sucess" class="modal">
+	<div role="dialog" aria-labelledby="dialog-title">
+		<div class="card">
+			<label for="sucess" class="modal-close"></label>
+			<h3 class="section text-center" id="dialog-title">
+				Sucesso!
+			</h3>
+			<p class="section">
+				Suas etiquetas foram impressas.
+			</p>
+		</div>
+	</div>
+
+	<input type="checkbox" id="error" class="modal">
+	<div role="dialog" aria-labelledby="dialog-title">
+		<div class="card warning">
+			<label for="error" class="modal-close"></label>
+			<h3 class="section text-center" id="dialog-title">
+				Erro!
+			</h3>
+			<p class="section">
+				Desculpe, mas ocorreu um erro.
+			</p>
+		</div>
+	</div>
+
+</body>
+</html>
