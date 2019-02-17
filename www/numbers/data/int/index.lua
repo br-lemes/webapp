@@ -8,6 +8,7 @@ local default = {
 	digits  = 3,
 	xoffset = 40,
 	yoffset = 15,
+	profile = "int",
 }
 
 if mg.request_info.request_method == "GET" then
