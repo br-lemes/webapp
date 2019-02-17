@@ -26,7 +26,7 @@ for file in lfs.dir("www") do
 	end
 end
 
-local f, e = io.open("index.mustache")
+local f, e = io.open("mustache/index")
 if not f then error(e) end
 local template = f:read("*a")
 f:close()
