@@ -2,7 +2,7 @@
 local webapp = require("pkg.webapp")
 
 local default = {
-	number  = 0,
+	number  = 1,
 	count   = 3,
 	ndays   = tonumber(os.date("%H")) >= 10 and 21 or 20,
 	digits  = 3,
