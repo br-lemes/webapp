@@ -10,51 +10,50 @@
 		div.card > div.section > div > * { width: 100%; }
 	</style>
 	<script>
+		var number, count, ndays, digits, xoffset, yoffset, print, pheader, sucess, error;
 		var profile = "vol";
 		function loadVol() {
 			fetch("/numbers/data/vol")
 				.then(function(response) { return response.json(); })
 				.then(function(data) {
-					var e = document.getElementById("count")
-					e.value = data.count;
-					e.focus();
-					e.select();
-					document.getElementById("number").value  = data.number;
-					document.getElementById("ndays").value   = data.ndays;
-					document.getElementById("digits").value  = data.digits;
-					document.getElementById("xoffset").value = data.xoffset;
-					document.getElementById("yoffset").value = data.yoffset;
-					document.getElementById("profile").innerHTML = "VOLUME";
-					document.getElementById("print").disabled = false;
-					profile = data.profile
+					number.value      = data.number;
+					count.value       = data.count;
+					ndays.value       = data.ndays;
+					digits.value      = data.digits;
+					xoffset.value     = data.xoffset;
+					yoffset.value     = data.yoffset;
+					print.disabled    = false;
+					pheader.innerHTML = "VOLUME";
+					profile           = data.profile;
+					count.focus();
+					count.select();
 			});
 		};
 		function loadInt() {
 			fetch("/numbers/data/int")
 				.then(function(response) { return response.json(); })
 				.then(function(data) {
-					var e = document.getElementById("count")
-					e.value = data.count;
-					e.focus();
-					e.select();
-					document.getElementById("number").value  = data.number;
-					document.getElementById("ndays").value   = data.ndays;
-					document.getElementById("digits").value  = data.digits;
-					document.getElementById("xoffset").value = data.xoffset;
-					document.getElementById("yoffset").value = data.yoffset;
-					document.getElementById("profile").innerHTML = "INT/REG";
-					document.getElementById("print").disabled = false;
-					profile = data.profile
+					number.value      = data.number;
+					count.value       = data.count;
+					ndays.value       = data.ndays;
+					digits.value      = data.digits;
+					xoffset.value     = data.xoffset;
+					yoffset.value     = data.yoffset;
+					print.disabled    = false;
+					pheader.innerHTML = "INT/REG";
+					profile           = data.profile;
+					count.focus();
+					count.select();
 				});
 		};
 		function doPrint() {
 			var data = {
-				number:  document.getElementById("number").value,
-				count:   document.getElementById("count").value,
-				ndays:   document.getElementById("ndays").value,
-				digits:  document.getElementById("digits").value,
-				xoffset: document.getElementById("xoffset").value,
-				yoffset: document.getElementById("yoffset").value,
+				number:  number.value,
+				count:   count.value,
+				ndays:   ndays.value,
+				digits:  digits.value,
+				xoffset: xoffset.value,
+				yoffset: yoffset.value,
 				profile: profile,
 			};
 			fetch("/numbers/print",
@@ -64,14 +63,26 @@
 				})
 				.then(function(response) {
 					if (response.ok) {
-						document.getElementById("sucess").checked = true;
-						document.getElementById("number").value = Math.ceil(data.number / 3) * 3;
+						sucess.checked = true;
+						number.value = Math.ceil(data.number / 3) * 3;
 					} else {
-						document.getElementById("error").checked = true;
+						error.checked = true;
 					}
 				});
 		};
-		document.addEventListener("DOMContentLoaded", loadVol);
+		document.addEventListener("DOMContentLoaded", function() {
+			number  = document.getElementById("number");
+			count   = document.getElementById("count");
+			ndays   = document.getElementById("ndays");
+			digits  = document.getElementById("digits");
+			xoffset = document.getElementById("xoffset");
+			yoffset = document.getElementById("yoffset");
+			print   = document.getElementById("print");
+			pheader = document.getElementById("profile");
+			sucess  = document.getElementById("sucess");
+			error   = document.getElementById("error");
+			loadVol();
+		});
 	</script>
 </head>
 <body>
