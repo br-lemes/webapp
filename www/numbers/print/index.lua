@@ -23,15 +23,15 @@ local default_int = {
 
 if mg.request_info.request_method == "POST" then
 	local data, e = webapp.decode(mg.read())
-	if not data then send_error(e) return end
+	if not data then webapp.send_error(e) return end
 	if data.profile == "vol" then
 		data = webapp.default(data, default_vol)
 	elseif data.profile == "int" then
 		data = webapp.default(data, default_int)
-	else send_error("No profile") return end
+	else webapp.send_error("No profile") return end
 
 	local p, e = io.open("LPT1:", "w") -- WARNING: Windows only
-	if not p then send_error(e) return end
+	if not p then webapp.send_error(e) return end
 	local date
 	if data.ndays and data.ndays > 0 then
 		date = os.date("*t")
@@ -59,7 +59,7 @@ if mg.request_info.request_method == "POST" then
 		if not s then webapp.send_error(e) return end
 	end
 	p:close()
-	send_ok()
+	webapp.send_ok()
 	local f, e = io.open(data.profile == "vol" and "data/numvol.json" or "data/numint.json", "w")
 	if not f then mg.write(e, "\r\n") return end
 	data = webapp.encode(data)
