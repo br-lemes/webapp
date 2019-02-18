@@ -15,8 +15,11 @@
 			fetch("/numbers/data/vol")
 				.then(function(response) { return response.json(); })
 				.then(function(data) {
+					var e = document.getElementById("count")
+					e.value = data.count;
+					e.focus();
+					e.select();
 					document.getElementById("number").value  = data.number;
-					document.getElementById("count").value   = data.count;
 					document.getElementById("ndays").value   = data.ndays;
 					document.getElementById("digits").value  = data.digits;
 					document.getElementById("xoffset").value = data.xoffset;
@@ -30,8 +33,11 @@
 			fetch("/numbers/data/int")
 				.then(function(response) { return response.json(); })
 				.then(function(data) {
+					var e = document.getElementById("count")
+					e.value = data.count;
+					e.focus();
+					e.select();
 					document.getElementById("number").value  = data.number;
-					document.getElementById("count").value   = data.count;
 					document.getElementById("ndays").value   = data.ndays;
 					document.getElementById("digits").value  = data.digits;
 					document.getElementById("xoffset").value = data.xoffset;
