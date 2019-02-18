@@ -4,8 +4,12 @@ local json = require("json")
 local mustache = require("mustache")
 
 mg.write("HTTP/1.0 200 OK\r\n")
+mg.write("Date:" .. os.date("! %a, %d %b %Y %H:%M:%S GMT") .. "\r\n")
+mg.write("Cache-Control: max-age=3600\r\n")
+mg.write("Last-Modified:" .. os.date("! %a, %d %b %Y %H:%M:%S GMT",
+	lfs.attributes("www/index.lua", "modification")) .. "\r\n")
 mg.write("Content-Type: text/html; charset=UTF-8\r\n")
-mg.write("Cache-Control: no-cache\r\n")
+mg.write("Connection: close\r\n")
 mg.write("\r\n")
 
 local view = { }
