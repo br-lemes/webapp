@@ -81,6 +81,12 @@
 			pheader = document.getElementById("profile");
 			sucess  = document.getElementById("sucess");
 			error   = document.getElementById("error");
+			count.addEventListener("keyup", function(event) {
+				if (event.keyCode === 13) {
+					event.preventDefault();
+					print.click();
+				}
+			});
 			loadVol();
 		});
 	</script>
