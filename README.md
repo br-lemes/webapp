@@ -12,3 +12,4 @@ This repository includes third party software which have their own license.
 * json.lua (MIT): https://github.com/rxi/json.lua/blob/master/LICENSE
 * mini.css (MIT): https://github.com/Chalarangelo/mini.css/blob/master/LICENSE
 * mustach (Public Domain): https://luapower.com/mustache
+* Icons (Creative Commons Attribution 3.0): https://www.fatcow.com/free-icons
