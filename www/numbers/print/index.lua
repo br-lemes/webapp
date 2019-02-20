@@ -4,6 +4,7 @@ local webapp = require("pkg.webapp")
 local default_vol = {
 	number  = 1,
 	count   = 3,
+	ndays   = tonumber(os.date("%H")) >= 10 and 8 or 7,
 	digits  = 3,
 	xoffset = 40,
 	yoffset = 15,
@@ -13,6 +14,7 @@ local default_vol = {
 local default_int = {
 	number  = 1,
 	count   = 3,
+	ndays   = tonumber(os.date("%H")) >= 10 and 21 or 20,
 	digits  = 3,
 	xoffset = 40,
 	yoffset = 15,
