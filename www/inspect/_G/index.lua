@@ -12,13 +12,15 @@ mg.write("Connection: close\r\n")
 mg.write("\r\n")
 
 view.path_info = string.format("/_G%s", mg.request_info.path_info or "")
-view.prev = view.path_info:match("(.*)/[^/]*$")
-view.current = view.path_info:match(".*/([^/]*)$")
+view.path_path = { }
 
 view.table = { }
+local full = ""
 local t = _G
 for p in view.path_info:gmatch("/([^/]*)") do
 	t = t[p]
+	full = string.format("%s/%s", full, p)
+	table.insert(view.path_path, {path = p, full = full})
 end
 for k,v in pairs(t) do
 	local key = k
@@ -38,8 +40,11 @@ table.sort(view.table, sort)
 
 local template = [[
 	<h1 class="section row">
-		<a href="" onclick="loadTable('/inspect/{{prev}}');">{{prev}}</a>
-		/{{current}}
+		{{#path_path}}
+		<a href="#" onclick="loadTable('/inspect{{full}}');">
+			/{{path}}
+		</a>
+		{{/path_path}}
 	</h1>
 	<div class="section">
 		<table>
