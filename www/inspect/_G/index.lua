@@ -29,11 +29,19 @@ for k,v in pairs(t) do
 			[[<a href="#" onclick="loadTable('/inspect%s/%s');">%s</a>]],
 			view.path_info, k, k)
 	end
-	table.insert(view.table, {k = k, key = key, value = tostring(v)})
+	table.insert(view.table, {k = k, v = v, key = key, value = tostring(v)})
 end
 
 local function sort(a, b)
-	return a.k < b.k
+	local typea = type(a.v) == "table"
+	local typeb = type(b.v) == "table"
+	if typea and typeb then
+		return a.k < b.k
+	end
+	if not typea and not typeb then
+		return a.k < b.k
+	end
+	return typea
 end
 
 table.sort(view.table, sort)
