@@ -26,7 +26,7 @@ for k,v in pairs(t) do
 	local key = k
 	if type(v) == "table" then
 		key = string.format(
-			[[<a href="#" onclick="loadTable('/inspect%s/%s');">%s</a>]],
+			[[<a href="#" onclick="loadTable('/inspector%s/%s');">%s</a>]],
 			view.path_info, k, k)
 	end
 	table.insert(view.table, {k = k, v = v, key = key, value = tostring(v)})
@@ -49,7 +49,7 @@ table.sort(view.table, sort)
 local template = [[
 		<h1 class="section row">
 			{{#path_path}}
-			<a href="#" onclick="loadTable('/inspect{{full}}');">
+			<a href="#" onclick="loadTable('/inspector{{full}}');">
 				/{{path}}
 			</a>
 			{{/path_path}}
@@ -104,8 +104,8 @@ else
 		<a href="/" class="col-sm button">
 			<img src="/img/bullet_back.png" width="32" height="32" alt="Voltar">
 		</a>
-		<a href="/inspect" class="col-sm button">
-			<img src="/inspect/icon.png" width="32" height="32" alt="Inspecionar">
+		<a href="/inspector" class="col-sm button">
+			<img src="/inspector/icon.png" width="32" height="32" alt="Inspecionar">
 		</a>
 	</header>
 	<div class="card fluid container" id="output">
