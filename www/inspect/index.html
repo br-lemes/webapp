@@ -9,7 +9,7 @@
 	<script>
 		var output;
 		function loadTable(path) {
-			fetch(path)
+			fetch(path + "?snippet=true")
 				.then(function(response) { return response.text(); })
 				.then(function(data) { output.innerHTML = data; });
 		};

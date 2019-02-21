@@ -47,31 +47,71 @@ end
 table.sort(view.table, sort)
 
 local template = [[
-	<h1 class="section row">
-		{{#path_path}}
-		<a href="#" onclick="loadTable('/inspect{{full}}');">
-			/{{path}}
-		</a>
-		{{/path_path}}
-	</h1>
-	<div class="section">
-		<table>
-			<thead>
-				<tr>
-					<th>Key</th>
-					<th>Value</th>
-				</tr>
-			</thead>
-			<tbody>
-				{{#table}}
-				<tr>
-					<td data-label="Key">{{{key}}}</td>
-					<td data-label="Value">{{value}}</td>
-				</tr>
-				{{/table}}
-			</tbody>
-		</table>
-	</div>
+		<h1 class="section row">
+			{{#path_path}}
+			<a href="#" onclick="loadTable('/inspect{{full}}');">
+				/{{path}}
+			</a>
+			{{/path_path}}
+		</h1>
+		<div class="section">
+			<table>
+				<thead>
+					<tr>
+						<th>Key</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#table}}
+					<tr>
+						<td data-label="Key">{{{key}}}</td>
+						<td data-label="Value">{{value}}</td>
+					</tr>
+					{{/table}}
+				</tbody>
+			</table>
+		</div>
 ]]
 
-mg.write(mustache.render(template, view))
+local snippet = mg.get_var(mg.request_info.query_string, "snippet") == "true"
+if snippet then
+	mg.write(mustache.render(template, view))
+else
+	mg.write(string.format([[
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href="/mini-default.min.css" rel="stylesheet">
+	<title>Inspecionar</title>
+	<style>body { background-color: #eee; }</style>
+	<script>
+		var output;
+		function loadTable(path) {
+			fetch(path + "?snippet=true")
+				.then(function(response) { return response.text(); })
+				.then(function(data) { output.innerHTML = data; });
+		};
+		document.addEventListener("DOMContentLoaded", function() {
+			output = document.getElementById("output");
+		});
+	</script>
+</head>
+<body>
+	<header class="row sticky">
+		<a href="/" class="col-sm button">
+			<img src="/img/bullet_back.png" width="32" height="32" alt="Voltar">
+		</a>
+		<a href="/inspect" class="col-sm button">
+			<img src="/inspect/icon.png" width="32" height="32" alt="Inspecionar">
+		</a>
+	</header>
+	<div class="card fluid container" id="output">
+%s
+	</div>
+</body>
+</html>
+]], mustache.render(template, view)))
+end
