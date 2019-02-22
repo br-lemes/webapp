@@ -78,41 +78,9 @@ local snippet = mg.get_var(mg.request_info.query_string, "snippet") == "true"
 if snippet then
 	mg.write(mustache.render(template, view))
 else
-	mg.write(string.format([[
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link href="/mini-default.min.css" rel="stylesheet">
-	<link rel="icon" href="/fatcow/16/document_inspector.png">
-	<title>Inspecionar</title>
-	<style>body { background-color: #eee; }</style>
-	<script>
-		var output;
-		function loadTable(path) {
-			fetch(path + "?snippet=true")
-				.then(function(response) { return response.text(); })
-				.then(function(data) { output.innerHTML = data; });
-		};
-		document.addEventListener("DOMContentLoaded", function() {
-			output = document.getElementById("output");
-		});
-	</script>
-</head>
-<body>
-	<header class="row sticky">
-		<a href="/" class="col-sm button">
-			<img src="/fatcow/32/bullet_back.png" width="32" height="32" alt="Voltar">
-		</a>
-		<a href="/inspector" class="col-sm button">
-			<img src="/fatcow/32/document_inspector.png" width="32" height="32" alt="Inspecionar">
-		</a>
-	</header>
-	<div class="card fluid container" id="output">
-%s
-	</div>
-</body>
-</html>
-]], mustache.render(template, view)))
+	local f = io.open("www/inspector/index.html")
+	if not f then return end
+	local buf = f:read("*a")
+	f:close()
+	mg.write(string.format(buf, "-->\n", mustache.render(template, view), "\t\t<!--"))
 end

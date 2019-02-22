@@ -16,7 +16,7 @@
 		};
 		document.addEventListener("DOMContentLoaded", function() {
 			output = document.getElementById("output");
-			loadTable("/inspector/_G");
+			if (location.pathname.match(/^\/inspector\/?$/)) loadTable("/inspector/_G");
 		});
 	</script>
 </head>
@@ -30,6 +30,7 @@
 		</a>
 	</header>
 	<div class="card fluid container" id="output">
+		<!-- %s%s%s -->
 	</div>
 </body>
 </html>
