@@ -26,6 +26,11 @@ local function send_error(body)
 	end
 end
 
+local function send_notfound()
+	mg.write("HTTP/1.0 404 Not Found\r\n")
+	send_info()
+end
+
 local function send_notallowed()
 	mg.write("HTTP/1.0 405 Method Not Allowed\r\n")
 	send_info()
@@ -77,6 +82,7 @@ end
 return {
 	send_ok         = send_ok,
 	send_error      = send_error,
+	send_notfound   = send_notfound,
 	send_notallowed = send_notallowed,
 	send            = send,
 	default         = default,
