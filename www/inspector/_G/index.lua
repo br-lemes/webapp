@@ -12,6 +12,9 @@ mg.write("Connection: close\r\n")
 mg.write("\r\n")
 
 view.path_info = string.format("/_G%s", mg.request_info.path_info or "")
+if view.path_info:sub(-1) == "/" then
+	view.path_info = view.path_info:sub(1, -2)
+end
 view.path_path = { }
 
 view.table = { }
