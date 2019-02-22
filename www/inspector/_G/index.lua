@@ -52,7 +52,7 @@ table.sort(view.table, sort)
 local template = [[
 		<h1 class="section row">
 			{{#path_path}}
-			<a href="#" onclick="loadTable('/inspector{{full}}');">
+			<a href="#" onclick="loadTable('/inspector{{{full}}}');">
 				/{{path}}
 			</a>
 			{{/path_path}}
