@@ -102,10 +102,10 @@ else
 <body>
 	<header class="row sticky">
 		<a href="/" class="col-sm button">
-			<img src="/img/bullet_back.png" width="32" height="32" alt="Voltar">
+			<img src="/fatcow/32/bullet_back.png" width="32" height="32" alt="Voltar">
 		</a>
 		<a href="/inspector" class="col-sm button">
-			<img src="/inspector/icon.png" width="32" height="32" alt="Inspecionar">
+			<img src="/fatcow/32/document_inspector.png" width="32" height="32" alt="Inspecionar">
 		</a>
 	</header>
 	<div class="card fluid container" id="output">

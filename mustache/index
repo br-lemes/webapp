@@ -15,7 +15,7 @@
 	<header class="row sticky">
 		{{#applist}}
 			<a href="{{href}}" class="col-sm button">
-				<img src="{{href}}/icon.png" width="32" height="32" alt="Ícone">
+				<img src="/fatcow/32/{{icon}}.png" width="32" height="32" alt="Ícone">
 			</a>
 		{{/applist}}
 	</header>
@@ -26,7 +26,7 @@
 	<div class="card fluid container">
 		<h2 class="row section">
 			<a href="{{href}}">
-				<img src="{{href}}/icon.png" width="32" height="32" alt="Ícone">
+				<img src="/fatcow/32/{{icon}}.png" width="32" height="32" alt="Ícone">
 				{{name}}
 			</a>
 		</h2>

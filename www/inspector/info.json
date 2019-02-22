@@ -1,1 +1,1 @@
-{ "name": "Inspetor", "description": "Inspecionar as variáveis globais Lua" }
+{ "icon": "document_inspector", "name": "Inspetor", "description": "Inspecionar as variáveis globais Lua" }
