@@ -85,6 +85,7 @@ else
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link href="/mini-default.min.css" rel="stylesheet">
+	<link rel="icon" href="/fatcow/16/document_inspector.png">
 	<title>Inspecionar</title>
 	<style>body { background-color: #eee; }</style>
 	<script>
