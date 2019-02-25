@@ -10,13 +10,13 @@
 	<script>
 		var output;
 		function loadTable(path) {
-			fetch(path + "?snippet=true")
+			fetch(path + "/?snippet=true")
 				.then(function(response) { return response.text(); })
 				.then(function(data) { output.innerHTML = data; });
 		};
 		document.addEventListener("DOMContentLoaded", function() {
 			output = document.getElementById("output");
-			if (location.pathname.match(/^\/inspector\/?$/)) loadTable("/inspector/_G/");
+			if (location.pathname.match(/^\/inspector\/?$/)) loadTable("/inspector/_G");
 		});
 	</script>
 </head>
