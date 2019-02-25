@@ -14,7 +14,7 @@
 		var number, count, ndays, digits, xoffset, yoffset, print, pheader, sucess, error;
 		var profile = "vol";
 		function loadVol() {
-			fetch("/numbers/data/vol")
+			fetch("/numbers/data/vol/")
 				.then(function(response) { return response.json(); })
 				.then(function(data) {
 					number.value      = data.number;
@@ -31,7 +31,7 @@
 			});
 		};
 		function loadInt() {
-			fetch("/numbers/data/int")
+			fetch("/numbers/data/int/")
 				.then(function(response) { return response.json(); })
 				.then(function(data) {
 					number.value      = data.number;
@@ -57,7 +57,7 @@
 				yoffset: yoffset.value,
 				profile: profile,
 			};
-			fetch("/numbers/print",
+			fetch("/numbers/print/",
 				{method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(data)
