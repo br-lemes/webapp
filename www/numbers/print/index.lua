@@ -62,6 +62,7 @@ if mg.request_info.request_method == "POST" then
 	webapp.send_ok()
 	local f, e = io.open(data.profile == "vol" and "data/numvol.json" or "data/numint.json", "w")
 	if not f then mg.write(e, "\r\n") return end
+	data.ndays = nil
 	data = webapp.encode(data)
 	local s, e = f:write(data)
 	f:close()
