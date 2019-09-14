@@ -8,9 +8,9 @@ local function send_info()
 	mg.write("\r\n")
 end
 
-local function send_ok(body)
+local function send_ok(body, content)
 	mg.write("HTTP/1.0 200 OK\r\n")
-	mg.write("Content-Type: application/json\r\n")
+	mg.write("Content-Type: " .. (content or "application/json") .. "\r\n")
 	mg.write("Cache-Control: no-cache\r\n")
 	send_info()
 	if body then
