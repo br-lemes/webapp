@@ -2,7 +2,7 @@
 package.loaded.lfs = lfs
 local json = require("json")
 local mustache = require("mustache")
-local webapp = require("pkg.webapp")
+local webapp = require("webapp")
 
 if mg.request_info.path_info then
 	return webapp.send_notfound()

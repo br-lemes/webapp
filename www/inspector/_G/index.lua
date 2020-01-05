@@ -1,7 +1,7 @@
 
 package.loaded.lfs = lfs
 local mustache = require("mustache")
-local webapp = require("pkg.webapp")
+local webapp = require("webapp")
 
 local view = { }
 view.path_info = string.format("/_G%s", mg.request_info.path_info or "")
