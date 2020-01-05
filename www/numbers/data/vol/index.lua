@@ -1,5 +1,5 @@
 
-local webapp = require("pkg.webapp")
+local webapp = require("webapp")
 
 local default = {
 	number  = 1,
